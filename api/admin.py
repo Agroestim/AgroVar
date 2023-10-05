@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from api.models import TecDataExcelFile
+from api.models import TechnicalDataModel
 
 # Register your models here.
-admin.site.register(TecDataExcelFile)
+admin.site.register(TechnicalDataModel)
