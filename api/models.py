@@ -4,7 +4,11 @@ from django.db import models
 
 
 class TechnicalDataFileModel(models.Model):
+<<<<<<< HEAD
     file_id = models.AutoField(primary_key=True)
+=======
+    file_id = models.AutoField()
+>>>>>>> c303aacd29abfb9918b6509e3bfc1952986c8c25
     gridfs_id = models.CharField(max_length=30, blank=True)
     file_name = models.CharField(max_length=40)
 
