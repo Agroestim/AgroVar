@@ -4,7 +4,7 @@ from django.db import models
 
 
 class TechnicalDataFileModel(models.Model):
-    file_id = models.AutoField(max_digits=10)
+    file_id = models.AutoField()
     gridfs_id = models.CharField(max_length=30, blank=True)
     file_name = models.CharField(max_length=40)
 
