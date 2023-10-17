@@ -4,38 +4,38 @@ from django.db import models
 
 
 class TechnicalDataFileModel(models.Model):
-    file_id = models.AutoField(max_digits=10)
+    file_id = models.AutoField(primary_key=True)
     gridfs_id = models.CharField(max_length=30, blank=True)
     file_name = models.CharField(max_length=40)
 
 
 class VarietyPaperModel(models.Model):
     VARITIES_CHOICES = [
-        ("", "Buck SY 200"),
-        ("", "Lenox"),
-        ("", "ACA 360"),
-        ("", "Algarrobo"),
-        ("", "Arslak"),
-        ("", "Baguette 601"),
-        ("", "Basilio"),
-        ("", "Bg 620"),
-        ("", "Bg 750"),
-        ("", "Biointa 2004"),
-        ("", "Biointa 3005"),
-        ("", "Biointa 3006"),
-        ("", "Cedro"),
-        ("", "Floripan 200"),
-        ("", "Guayabo"),
-        ("", "MS INTA 119"),
-        ("", "Ñandubay"),
-        ("", "Sursem 2330"),
+        ("BUCKSY200", "Buck SY 200"),
+        ("LENOX", "Lenox"),
+        ("ACA360", "ACA 360"),
+        ("ALGARROBBO", "Algarrobo"),
+        ("ARSLAK", "Arslak"),
+        ("BAGUETTE601", "Baguette 601"),
+        ("BASILIO", "Basilio"),
+        ("BG620", "Bg 620"),
+        ("BG750", "Bg 750"),
+        ("BIOINTA2004", "Biointa 2004"),
+        ("BIOINTA3005", "Biointa 3005"),
+        ("BIOINTA3006", "Biointa 3006"),
+        ("CEDRO", "Cedro"),
+        ("FLORIPAND", "Floripan 200"),
+        ("GUAYABO", "Guayabo"),
+        ("MSINTA119", "MS INTA 119"),
+        ("ÑANDUBAY", "Ñandubay"),
+        ("SURSEM2330", "Sursem 2330"),
     ]
 
     paper_id = models.BigAutoField(primary_key=True)
     variety = models.CharField(
-        name="Variedad", choices=VARITIES_CHOICES, max_length=50, blank=False
+        name="Variedad", choices=VARITIES_CHOICES, max_length=50, null=False
     )
-    humidity_percentage = models.FloatField(name="Humedad (%)", blank=False)
+    humidity_percentage = models.FloatField(name="Humedad", blank=False)
     performance = models.IntegerField(name="Redimiento (kg/ha)", blank=False)
     relative_performance = models.IntegerField(name="Redimiento Relativo", blank=False)
     grains_count = models.IntegerField(name="Numero de granos", blank=False)
@@ -43,22 +43,34 @@ class VarietyPaperModel(models.Model):
     weight_per_thousand_grains = models.FloatField(
         name="Peso por mil granos", blank=False
     )
-    proteins_percentage = models.FloatField(name="Proteinas (%)", blank=False)
+    proteins_percentage = models.FloatField(name="Proteinas", blank=False)
     ph = models.FloatField(name="Potencial de Hidrogeno", blank=False)
+
+    def __str__(self):
+        return f"{self.paper_id}"
 
 
 class TechnicalDataModel(models.Model):
-    REFERENCES_CHOICES = [("", "Red INTA 2022"), ("", "INTA Laboulaye")]
-    PAPER_TYPES_CHOICES = [("", "Variedades")]
+    """
+    ### Django Model
+    Technical Data Model is a data set representation of variants papers and
+    their campaign information.
+    """
+
+    REFERENCES_CHOICES = [
+        ("RED INTA 2022", "Red INTA 2022"),
+        ("INTA LABOULAYE", "INTA Laboulaye"),
+    ]
+    PAPER_TYPES_CHOICES = [("VARIEDADES", "Variedades")]
 
     LOCATIONS_CHOICES = [
-        ("", "Adelia Maria"),
-        ("", "Bell Ville"),
-        ("", "Justiniano Posse"),
-        ("", "La Carlota"),
-        ("", "Laboulaye"),
-        ("", "Marcos Juarez"),
-        ("", "Onagoity"),
+        ("ADELIA MARIA", "Adelia Maria"),
+        ("BELL VILLE", "Bell Ville"),
+        ("JUSTINIANO POSSE", "Justiniano Posse"),
+        ("LA CARLOTA", "La Carlota"),
+        ("LABOULAYE", "Laboulaye"),
+        ("MARCOZ JUAREZ", "Marcos Juarez"),
+        ("ONAGOITY", "Onagoity"),
     ]
 
     document_id = models.AutoField(primary_key=True)
@@ -72,9 +84,16 @@ class TechnicalDataModel(models.Model):
     location = models.CharField(
         name="Localidad", choices=LOCATIONS_CHOICES, max_length=50
     )
-    latitude = models.IntegerField(name="Latitud", blank=True)
-    longitude = models.IntegerField(name="Longitud", blank=False)
+    latitude = models.IntegerField(name="Latitud", null=True)
+    longitude = models.IntegerField(name="Longitud", null=True)
 
     paper_pepetition = models.IntegerField(
         name="Repeiciones del ensayo", default=1, blank=False
     )
+
+    paper = models.ForeignKey(
+        VarietyPaperModel, verbose_name="Ensayo", on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"{self.document_id}"
