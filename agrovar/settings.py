@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Graphene Schema
-GRAPHENE = {"SCHEMA": "agrovar.schema.schema"}
+GRAPHENE = {"SCHEMA": "agrovar.schema.SCHEMA"}
 
 # Application definition
 
