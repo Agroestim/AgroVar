@@ -14,6 +14,7 @@ class VarietyPaperModel(models.Model):
         ("BUCKSY200", "Buck SY 200"),
         ("LENOX", "Lenox"),
         ("ACA360", "ACA 360"),
+        ("ACA365", "ACA 365"),
         ("ALGARROBBO", "Algarrobo"),
         ("ARSLAK", "Arslak"),
         ("BAGUETTE601", "Baguette 601"),

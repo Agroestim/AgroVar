@@ -31,8 +31,8 @@ class TechnicalDataType(graphene_django.DjangoObjectType):
 
 class LocationRankingType(graphene_django.DjangoObjectType):
     class Meta:
-        model = models.TechnicalDataModel
-        fields = ("document_id", "year", "location")
+        model = models.VarietyPaperModel
+        fields = "__all__"
 
 
 class TechnicalDataQueryType(graphene.ObjectType):
@@ -44,7 +44,10 @@ class TechnicalDataQueryType(graphene.ObjectType):
     paper_variety_set = graphene.List(VarietyPaperDataType)
     """Represents a complete set of papers and varieties data."""
 
-    location_ranking = graphene.List(LocationRankingType)
+    location_ranking = graphene.List(LocationRankingType, location=graphene.String())
+
+    def resolve_location_ranking(self, info, location):
+        return models.VarietyPaperModel.objects.all().filter(location__exact=location)
 
     def resolve_paper_variety_set(self, info):
         return models.VarietyPaperModel.objects.all()
