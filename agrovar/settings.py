@@ -26,8 +26,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
-DEBUG = True
+DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
 
 ALLOWED_HOSTS = ["*"]
 

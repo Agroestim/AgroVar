@@ -45,7 +45,7 @@ class VarietyComparatorType(graphene.ObjectType):
     class Meta:
         description = "Consulta estatica para el comparador de variedades."
 
-    campaing = graphene.Date()
+    year = graphene.Date()
     location = graphene.String()
     variety = graphene.String()
 
@@ -65,7 +65,9 @@ class TechnicalDataQueryType(graphene.ObjectType):
     )
 
     variety_comparator = graphene.List(
-        VarietyComparatorType, varieties=graphene.List(graphene.String)
+        # VarietyComparatorType, varieties=graphene.List(graphene.String)
+        TechnicalDataType,
+        varieties=graphene.List(graphene.String),
     )
 
     def resolve_location_ranking(self, info, location: str):
@@ -76,7 +78,13 @@ class TechnicalDataQueryType(graphene.ObjectType):
         return related_ranking
 
     def resolve_variety_comparator(self, info, varieties: list[str]):
-        return models.TechnicalDataModel.objects.none()
+        related_varieties = models.TechnicalDataModel.objects.select_related(
+            "paper_fk"
+        ).filter(
+            variety__in=[map(lambda clean_variety: clean_variety.upper(), varieties)]
+        )
+
+        return related_varieties
 
 
 SCHEMA = graphene.Schema(query=TechnicalDataQueryType)
