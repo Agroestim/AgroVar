@@ -29,28 +29,23 @@ class TechnicalDataType(graphene_django.DjangoObjectType):
         fields = "__all__"
 
 
-class LocationRankingType(graphene_django.DjangoObjectType):
-    class Meta:
-        model = models.VarietyPaperModel
-        fields = "__all__"
-
-
 class TechnicalDataQueryType(graphene.ObjectType):
     """
     ### Graphene ObjectType
     Represents a ranking
     """
 
-    paper_variety_set = graphene.List(VarietyPaperDataType)
-    """Represents a complete set of papers and varieties data."""
+    location_ranking = graphene.List(TechnicalDataType, location=graphene.String())
+    """Represents a list of varities ranked by location."""
 
-    location_ranking = graphene.List(LocationRankingType, location=graphene.String())
+    def resolve_location_ranking(self, info, location: str):
+        location = location.upper()
 
-    def resolve_location_ranking(self, info, location):
-        return models.VarietyPaperModel.objects.all().filter(location__exact=location)
+        related_ranking = models.TechnicalDataModel.objects.filter(
+            location__exact=location
+        ).select_related("paper_fk")
 
-    def resolve_paper_variety_set(self, info):
-        return models.VarietyPaperModel.objects.all()
+        return related_ranking
 
 
 SCHEMA = graphene.Schema(query=TechnicalDataQueryType)
