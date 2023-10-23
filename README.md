@@ -76,6 +76,9 @@ Recomendamos encarecidamente el uso de Docker como infraestructura local de desp
   # Sobre el directorio raiz -> AgroVar, debes hacer lo siguiente:
   python manage.py migrate
 
+  # Si ocurre que no se han creado correctamente los modelos, haz lo siguiente:
+  python manage.py migrate api
+
   # Una vez haya terminado satisfactoriamente el comando, debes hacer lo siguiente:
   python manage.py makemigrations
 ```

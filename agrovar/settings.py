@@ -26,13 +26,12 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
-DEUBU = True
+DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["*"]
 
 # Graphene Schema
-GRAPHENE = {"SCHEMA": "agrovar.schema.schema"}
+GRAPHENE = {"SCHEMA": "agrovar.schema.SCHEMA"}
 
 # Application definition
 
@@ -132,3 +131,6 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Logging
+# https://docs.djangoproject.com/en/4.2/ref/logging/#logging
