@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SUPERUSER_PASSWORD ab3135c2@
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y netcat
+# RUN apt-get update && apt-get install -y netcat
 
 # Install service dependencies
 RUN pip install --upgrade pip
