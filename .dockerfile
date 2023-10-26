@@ -42,9 +42,8 @@ RUN python manage.py collecstatics
 RUN python -m django createsuperuser --username root-admin
 
 
-
 # Expose and redirect ports
 EXPOSE 8080-80
 
 # Define the container entrypoint
-ENTRYPOINT [ "python", "manage.py", "runserver", "" ]
+ENTRYPOINT [ "python", "manage.py", "runserver", "8080" ]
