@@ -1,5 +1,5 @@
 # Pulling python image from docker hub
-FROM python:3.11.5-bookworm as builder
+FROM python:3.11.5-slim-bookworm
 
 # Set work directory
 WORKDIR /app
@@ -8,9 +8,6 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SUPERUSER_PASSWORD ab3135c2@
-
-# Install system dependencies
-# RUN apt-get update && apt-get install -y netcat
 
 # Install service dependencies
 RUN pip install --upgrade pip
@@ -22,28 +19,28 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Pulling python slim image from docker hub
-FROM python:3.11.5-slim-bookworm
+# FROM python:3.11.5-slim-bookworm
 
 # Set workdir directory
 WORKDIR /app
 
 # Copy from builder
-COPY --from=builder /app /app
+# COPY --from=builder /app /app
 
 # Run migrations
 RUN python manage.py migrate
 RUN python manage.py migrate api
-RUN python manage.py makemigrations
+# RUN python manage.py makemigrations
 
 # Run collect statics
 RUN python manage.py collecstatics
 
 # Create superuser
-RUN python -m django createsuperuser --username root-admin
+RUN python manage.py createsuperuser --no-input --username root-admin --email Giorgisprieto@outlook.com.ar
 
 
 # Expose and redirect ports
-EXPOSE 8080-80
+EXPOSE 8080
 
 # Define the container entrypoint
-ENTRYPOINT [ "python", "manage.py", "runserver", "8080" ]
+ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8080" ]
