@@ -43,4 +43,4 @@ RUN python manage.py createsuperuser --no-input --username root-admin --email Gi
 EXPOSE 8080
 
 # Define the container entrypoint
-ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8080" ]
+ENTRYPOINT [ "python", "manage.py", "runserver", "localhost:8080" ]
