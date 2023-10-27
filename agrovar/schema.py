@@ -81,7 +81,9 @@ class TechnicalDataQueryType(graphene.ObjectType):
         related_varieties = models.TechnicalDataModel.objects.select_related(
             "paper_fk"
         ).filter(
-            variety__in=[map(lambda clean_variety: clean_variety.upper(), varieties)]
+            paper_fk__variety__in=[
+                map(lambda clean_variety: clean_variety.upper(), varieties)
+            ]
         )
 
         return related_varieties
