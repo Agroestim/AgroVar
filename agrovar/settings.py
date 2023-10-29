@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get(
 # DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "192.168.1.103"]
 
 # Graphene Schema
 GRAPHENE = {"SCHEMA": "agrovar.schema.SCHEMA"}
