@@ -26,9 +26,10 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
+# DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Graphene Schema
 GRAPHENE = {"SCHEMA": "agrovar.schema.SCHEMA"}
@@ -36,21 +37,21 @@ GRAPHENE = {"SCHEMA": "agrovar.schema.SCHEMA"}
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "corsheaders",
     "graphene_django",
     "api",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -140,6 +141,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS
 # https://github.com/adamchainz/django-cors-headers
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost",
     "http://192.168.1.104",
