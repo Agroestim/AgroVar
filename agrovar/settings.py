@@ -20,19 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    "AGROVAR_SECRET_KEY",
-    "django-insecure-ykts*w3nd5xcgd89c!ebg5(hj!d+cr#42yeh@6p-9xrry=!i+u",
-)
+SECRET_KEY = os.environ.get("AGROVAR_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
-DEBUG = False
+DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "192.168.1.103"]
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = ["localhost", "192.168.1.103"]
 
 # Graphene Schema
-GRAPHENE = {"SCHEMA": "agrovar.schema.SCHEMA"}
+GRAPHENE = {"SCHEMA": "api.schema.schema.SCHEMA"}
 
 # Application definition
 
@@ -141,6 +140,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS
 # https://github.com/adamchainz/django-cors-headers
+
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost",

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from api.models import TechnicalDataModel, VarietyPaperModel
+from api.models import CampaignPaperModel, VarietyPaperModel
 
 # Register your models here.
 admin.site.register(VarietyPaperModel)
-admin.site.register(TechnicalDataModel)
+admin.site.register(CampaignPaperModel)
