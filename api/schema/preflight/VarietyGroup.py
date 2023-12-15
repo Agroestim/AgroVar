@@ -19,7 +19,7 @@ class VarietyGroupPreflightQuery(graphene.ObjectType):
     variety_options_list = graphene.List(graphene.String)
 
     def resolve_campaign_options_list(self, info):
-        campaign_options = ["not implemented"]
+        campaign_options = []
         return campaign_options
 
     def resolve_location_options_list(self, info):

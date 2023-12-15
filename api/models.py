@@ -79,7 +79,7 @@ class CampaignPaperModel(models.Model):
         verbose_name="Repeiciones del ensayo", default=1, blank=False
     )
 
-    paper = models.ForeignKey(
+    paper_variety = models.ForeignKey(
         VarietyPaperModel,
         verbose_name="Ensayo",
         on_delete=models.CASCADE,
@@ -87,4 +87,4 @@ class CampaignPaperModel(models.Model):
     )
 
     def __str__(self):
-        return f"{self.document_id}/{self.paper.paper_id}"
+        return f"{self.document_id}/{self.paper_variety.paper_id}"

@@ -28,7 +28,7 @@ DEBUG = bool(os.environ.get("AGROVAR_DEBUG_MODE", None))
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 
-ALLOWED_HOSTS = ["localhost", "192.168.1.103"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.1.103"]
 
 # Graphene Schema
 GRAPHENE = {"SCHEMA": "api.schema.schema.SCHEMA"}

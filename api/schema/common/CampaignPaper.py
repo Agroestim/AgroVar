@@ -4,6 +4,17 @@ import graphene_django
 from api import models
 
 
+class VarietyPaperType(graphene_django.DjangoObjectType):
+    """
+    Variety paper type definition for Django `VarietyPaperModel`.
+    """
+
+    class Meta:
+        description = ""
+        model = models.VarietyPaperModel
+        fields = "__all__"
+
+
 class CampaignPaperType(graphene_django.DjangoObjectType):
     """
     Graphene object type definition for Django `CampaignPaperModel`.
@@ -52,7 +63,9 @@ class CampaignPaperQuery(graphene.ObjectType):
 
     def resolve_variety_comparator(self, info, varieties: list[str]):
         related_varieties = models.CampaignPaperModel.objects.filter(
-            paper__variety__in=[clean_variety.upper() for clean_variety in varieties]
+            paper_variety__variety__in=[
+                clean_variety.upper() for clean_variety in varieties
+            ]
         )
 
         return related_varieties
