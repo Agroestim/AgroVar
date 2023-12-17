@@ -33,7 +33,6 @@ RUN python manage.py collectstatic
 RUN python manage.py createsuperuser --no-input --username admin-root
 
 # Expose 
-EXPOSE 8080
-
+EXPOSE 8000
 # Define the container entrypoint
-ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8080" ]
+ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
