@@ -29,8 +29,7 @@ Actualmente el proyecto se encuentra en la fase final de desarrollo para la vers
 
 # Documentacion del desarrollador
 
-> **IMPRTANTE**: Solo los miembros autorizados y los miembros del equipo de **AgroVar Team** pueden trabajar sobre el proyecto.
-> Si ya eres miembro pero no tienes permisos, hablanos por nuestro [chat de whatsapp](https://chat.whatsapp.com/E6XukSgOIAn3oxmZyFzY25 "Whatsapp Chat") y te ayudaremos.
+> Actualmente el proyecto se encuentra en mantenimiento, solo el personal autorizado tiene acceso a modificar el codigo fuente.
 
 En esta seccion encontraras toda la informacion necesaria para poder llevar a cabo el desarrollo de la API.
 
